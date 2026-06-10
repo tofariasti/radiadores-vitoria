@@ -1,18 +1,32 @@
 (function () {
   'use strict';
 
+  function normalizePath(path) {
+    return String(path || '').replace(/\\/g, '/');
+  }
+
+  function isSitePage() {
+    return /(?:^|\/)site(?:\/|$)/.test(normalizePath(location.pathname));
+  }
+
   function detectBasePath() {
     var host = location.hostname;
-    if (!host.endsWith('.github.io')) return '';
+    var path = normalizePath(location.pathname);
 
-    var parts = location.pathname.split('/').filter(Boolean);
-    if (!parts.length) return '';
+    if (host.endsWith('.github.io')) {
+      var parts = path.split('/').filter(Boolean);
+      if (!parts.length) return '';
 
-    var first = parts[0];
-    if (first === 'site' || first === 'assets') return '';
-    if (/\.html?$/i.test(first)) return '';
+      var first = parts[0];
+      if (first === 'site' || first === 'assets') return '';
+      if (/\.html?$/i.test(first)) return '';
 
-    return '/' + first;
+      return '/' + first;
+    }
+
+    if (isSitePage()) return '..';
+
+    return '';
   }
 
   window.__ASSET_BASE__ = detectBasePath();
@@ -22,6 +36,8 @@
 
     var clean = String(path).replace(/^\//, '');
     var base = window.__ASSET_BASE__ || '';
+
+    if (base === '..') return '../' + clean;
 
     return base ? base + '/' + clean : '/' + clean;
   };

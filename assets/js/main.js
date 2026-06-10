@@ -66,6 +66,14 @@
     }
   }
 
+  function applyLogoImages() {
+    const logo = config.logoUrl;
+    if (!logo) return;
+    document.querySelectorAll('.site-nav__brand img, .site-footer img').forEach((img) => {
+      img.src = assetUrl(logo);
+    });
+  }
+
   function applyContactData() {
     document.querySelectorAll('[data-telefone-fixo]').forEach((el) => {
       el.textContent = config.telefoneFixo || '';
@@ -338,6 +346,7 @@
     applyInstagramLinks();
     applyContactData();
     applyHeroPoster();
+    applyLogoImages();
     renderServicos();
     renderGaleria();
     renderDiferenciais();
