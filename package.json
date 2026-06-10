@@ -1,0 +1,13 @@
+{
+  "name": "radiadores-vitoria",
+  "version": "1.0.0",
+  "description": "Landing page Radiadores Vitória — Porto Alegre/RS",
+  "scripts": {
+    "build:css": "tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --minify",
+    "build": "npm run build:css",
+    "watch:css": "tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}
