@@ -241,7 +241,7 @@ body.demo-standalone .site-nav__mobile {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center 38%;
 }
 
 .hero__overlay {
